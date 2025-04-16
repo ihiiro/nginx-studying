@@ -1,0 +1,5 @@
+
+
+filters work in parallel and depend on each other's output as if on a 
+pipeline, a filter B can be processing input from filter B while filter A
+is processing its input.

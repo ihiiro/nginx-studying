@@ -1,0 +1,9 @@
+DELEGATION MODE:
+    handlers, filters, load_balancers
+
+handlers process a request and produce output.
+
+filters manipulate the output produced by a handler.
+
+load-balancers choose a backend server to send a request to, 
+when more than one backend server is eligible.

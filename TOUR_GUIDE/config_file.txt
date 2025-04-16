@@ -1,0 +1,9 @@
+CONTEXTS:
+    main, server, upstream, location.
+
+main = 1*( server location upstream )
+server = 1*( authority "," )
+authority = host ":" port
+location = URL
+
+upstream = backend_servers

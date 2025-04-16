@@ -1,0 +1,10 @@
+
+
+
+
+A load-balancer takes a request and a set of backend servers 
+and decides which server will get the request. Nginx ships with 
+two load-balancing modules: round-robin, which deals out requests 
+like cards at the start of a poker game, and the "IP hash" method, 
+which ensures that a particular client will hit the same backend 
+server across multiple requests.

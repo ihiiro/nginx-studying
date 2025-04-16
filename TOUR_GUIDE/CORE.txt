@@ -1,0 +1,7 @@
+
+
+
+The "core" of Nginx simply takes care of all the network and 
+application protocols and sets up the sequence of modules 
+that are eligible to process a request.
+

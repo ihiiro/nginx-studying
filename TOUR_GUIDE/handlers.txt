@@ -1,0 +1,10 @@
+
+
+at server startup, each handler gets a chance to attach itself 
+to particular locations defined in the configuration; if more than 
+one handler attaches to a particular location, only one will "win".
+
+Handlers can return in three ways: all is good, there was an error, 
+or it can decline to process the request and defer to the default 
+handler (typically something that serves static files).
+
