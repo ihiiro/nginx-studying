@@ -1,5 +1,26 @@
 >>>>>>>>>>> RFC 9112 section 2.2 <<<<<<<<<<<<<
-                ## In the interest of robustness, a server that is expecting
-                ## to receive and parse a request-line SHOULD ignore at least
-                ## one empty line (CRLF) received prior to the request-line
+        ## In the interest of robustness, a server that is expecting
+        ## to receive and parse a request-line SHOULD ignore at least
+        ## one empty line (CRLF) received prior to the request-line
 
+>>>>>>>>>>> RFC 9110 section 5.6.2 <<<<<<<<<<<
+        ## NGINX request line parser allows a subset of token:
+        ## token          = 1*tchar
+        ## tchar          = "!" / "#" / "$" / "%" / "&" / "'" / "*"
+        ## / "+" / "-" / "." / "^" / "_" / "`" / "|" / "~"
+        ## / DIGIT / ALPHA
+        ## ; any VCHAR, except delimiters
+
+>>>>>>>>>>>>> NOTE <<<<<<<<<<<<<
+        ## NGINX uses finite state machines to parse HTTP messages
+        ## other parser procedures employ the same processs.
+
+>>>>>>>>>> RFC 9112 section 3 <<<<<<<<<<<
+        ## Although the request-line grammar rule requires that each of the component 
+        ## elements be separated by a single SP octet, recipients MAY instead parse on
+        ## whitespace-delimited word boundaries and, aside from the CRLF terminator, 
+        ## treat any form of whitespace as the SP separator while ignoring preceding 
+        ## or trailing whitespace; such whitespace includes one or more of the following 
+        ## octets: SP, HTAB, VT (%x0B), FF (%x0C), or bare CR. However, lenient parsing 
+        ## can result in request smuggling security vulnerabilities if there are multiple 
+        ## recipients of the message and each has its own unique interpretation of robustness 
