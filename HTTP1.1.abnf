@@ -40,14 +40,12 @@ method = token
 
 obs-fold = OWS CRLF RWS
 obs-text = <obs-text, see [HTTP], Section 5.6.4>
-origin-form = absolute-path [ "?" query ]
 
 port = <port, see [URI], Section 3.2.3>
 
 query = <query, see [URI], Section 3.4>
 quoted-string = <quoted-string, see [HTTP], Section 5.6.4>
 
-reason-phrase = 1*( HTAB / SP / VCHAR / obs-text )
 
 
 ########## #########
@@ -56,20 +54,43 @@ reason-phrase = 1*( HTAB / SP / VCHAR / obs-text )
 
 
 request-line = method SP request-target SP HTTP-version
+request-target = origin-form / absolute-form / authority-form / asterisk-form
+
+########## PATH ############
+
+
+
+
+
+
+
+origin-form = absolute-path [ "?" query ]
+absolute-path = 1*( "/" segment )
+
+segment       = *pchar < RFC 3986 section 3.3 >
+
+
+
+
+
+
+
+
+########## ############
+
 status-line = HTTP-version SP status-code SP [ reason-phrase ]
 HTTP-name = %x48.54.54.50 ; HTTP
 HTTP-version = HTTP-name "/" DIGIT "." DIGIT
-
+start-line = request-line / status-line
+reason-phrase = 1*( HTAB / SP / VCHAR / obs-text )
+status-code = 3DIGIT
 
 
 
 ######### ###########
 
-request-target = origin-form / absolute-form / authority-form /
- asterisk-form
 
-start-line = request-line / status-line
-status-code = 3DIGIT
+
 
 token = <token, see [HTTP], Section 5.6.2>
 trailer-section = *( field-line CRLF )
