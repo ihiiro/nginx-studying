@@ -24,3 +24,19 @@
         ## octets: SP, HTAB, VT (%x0B), FF (%x0C), or bare CR. However, lenient parsing 
         ## can result in request smuggling security vulnerabilities if there are multiple 
         ## recipients of the message and each has its own unique interpretation of robustness 
+
+>>>>>>>>>>> RFC 9112 section 4 <<<<<<<<<<<<<<<<
+        ## Although the status-line grammar rule requires that each of the 
+        ## component elements be separated by a single SP octet, recipients 
+        ## MAY instead parse on whitespace-delimited word boundaries and, aside 
+        ## from the line terminator, treat any form of whitespace as the SP 
+        ## separator while ignoring preceding or trailing whitespace; such
+        ## whitespace includes one or more of the following octets: SP, HTAB, 
+        ## VT (%x0B), FF (%x0C), or bare CR. However, lenient parsing can 
+        ## result in response splitting security vulnerabilities if there are 
+        ## multiple recipients of the message and each has its own unique 
+        ## interpretation of robustness
+
+>>>>>>>> NOTE <<<<<<<<<
+        ## NGINX request-line parser restricts u_char to range [32, 255] to treat 0x00 as a space
+        ## it only recognizes SP ( 0x20 ) and there can be atleast 1 SP.
