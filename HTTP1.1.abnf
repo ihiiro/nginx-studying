@@ -65,13 +65,19 @@ request-target = origin-form / absolute-form / authority-form / asterisk-form
 
 
 origin-form = absolute-path [ "?" query ]
+
 absolute-path = 1*( "/" segment )
 
 segment       = *pchar < RFC 3986 section 3.3 >
 
+query       = *( pchar / "/" / "?" ) < RFC 3986 section 3.4 >
 
-
-
+< RFC 3986 collected ABNF >
+pchar         = unreserved / pct-encoded / sub-delims / ":" / "@"
+unreserved    = ALPHA / DIGIT / "-" / "." / "_" / "~"
+pct-encoded   = "%" HEXDIG HEXDIG
+sub-delims    = "!" / "$" / "&" / "'" / "(" / ")"
+                 / "*" / "+" / "," / ";" / "="
 
 
 
