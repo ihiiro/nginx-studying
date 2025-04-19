@@ -40,3 +40,8 @@
 >>>>>>>> NOTE <<<<<<<<<
         ## NGINX request-line parser restricts u_char to range [32, 255] to treat 0x00 as a space
         ## it only recognizes SP ( 0x20 ) and there can be atleast 1 SP.
+
+>>>>>>>>> RFC 9112 section 2.2 <<<<<<<<<<<<
+        ## Although the line terminator for the start-line and fields is the sequence 
+        ## CRLF, a recipient MAY recognize a single LF as a line terminator and ignore 
+        ## any preceding CR.
