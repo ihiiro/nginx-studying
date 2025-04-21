@@ -12,7 +12,7 @@ token = 1*tchar
 tchar = "!" / "#" / "$" / "%" / "&" / "'" / "*" / "+" / "-" / "." /
  "^" / "_" / "`" / "|" / "~" / DIGIT / ALPHA
 field-value = *field-content
-field-content = field-vchar [ 1*( SP / HTAB / field-vchar )
+field-content = field-vchar [ 1*( SP / HTAB / field-vchar ) field-vchar ]
 field-vchar = VCHAR / obs-text
 
 
