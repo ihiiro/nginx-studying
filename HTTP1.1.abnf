@@ -2,8 +2,21 @@
 
 BWS = <BWS, see [HTTP], Section 5.6.3>
 
-HTTP-message = start-line CRLF *( field-line CRLF ) CRLF [
- message-body ]
+
+################## MARKER ########################
+
+HTTP-message = start-line CRLF *( field-line CRLF ) CRLF [ message-body ]
+field-line = field-name ":" OWS field-value OWS
+field-name = token
+token = 1*tchar
+tchar = "!" / "#" / "$" / "%" / "&" / "'" / "*" / "+" / "-" / "." /
+ "^" / "_" / "`" / "|" / "~" / DIGIT / ALPHA
+field-value = *field-content
+field-content = field-vchar [ 1*( SP / HTAB / field-vchar )
+field-vchar = VCHAR / obs-text
+
+
+################## MARKER ########################
 
 
 OWS = <OWS, see [HTTP], Section 5.6.3>
@@ -29,7 +42,6 @@ chunk-ext-val = token / quoted-string
 chunk-size = 1*HEXDIG
 chunked-body = *chunk last-chunk trailer-section CRLF
 
-field-line = field-name ":" OWS field-value OWS
 field-name = <field-name, see [HTTP], Section 5.1>
 field-value = <field-value, see [HTTP], Section 5.5>
 
@@ -83,6 +95,9 @@ sub-delims    = "!" / "$" / "&" / "'" / "(" / ")"
 
 
 ########## ############
+
+VCHAR          =  %x21-7E
+                                ; visible (printing) characters
 
 status-line = HTTP-version SP status-code SP [ reason-phrase ]
 HTTP-name = %x48.54.54.50 ; HTTP
