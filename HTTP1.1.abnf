@@ -7,6 +7,7 @@ BWS = <BWS, see [HTTP], Section 5.6.3>
 
 HTTP-message = start-line CRLF *( field-line CRLF ) CRLF [ message-body ]
 field-line = field-name ":" OWS field-value OWS
+OWS = *( SP / HTAB )
 field-name = token
 token = 1*tchar
 tchar = "!" / "#" / "$" / "%" / "&" / "'" / "*" / "+" / "-" / "." /
@@ -14,7 +15,6 @@ tchar = "!" / "#" / "$" / "%" / "&" / "'" / "*" / "+" / "-" / "." /
 field-value = *field-content
 field-content = field-vchar [ 1*( SP / HTAB / field-vchar ) field-vchar ]
 field-vchar = VCHAR / obs-text
-
 
 ################## MARKER ########################
 
