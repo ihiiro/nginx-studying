@@ -27,7 +27,9 @@ segment       = *pchar < RFC 3986 section 3.3 >
 
 pchar         = unreserved / sub-delims / ":" / "@"
 
-ERROR_PAGES = 1#( CODE "_" absolute-path ) [ comment ] LF
+CODE = 1*DIGIT
+
+ERROR_PAGES = 1*( CODE "|" absolute-path [ comment ] LF )
 
 MAX_CLIENT_MESSAGE_SIZE = 1*DIGIT ( "B" / "K" / "M" / "G" ) [ comment ] LF
 
@@ -52,5 +54,9 @@ comment-block = 1*( [ comment ] LF )
 VAL = SERVER_NAME / ROUTES / ERROR_PAGES / FILE_IF_DIRECTORY_REQUEST / MAX_CLIENT_MESSAGE_SIZE
 
 server-block = authority 1*( VAR VAL ) ; not interpreted literally because syntax is unique to each VAR
+
+UPLOADS = 1*( absolute-path "|" system-path [ comment ] LF )
+
+COMMON_GATEWAY_INTERFACE = 1*2( ( GET / POST ) _ ) ( ".py" / ".php" ) ( ".py" / ".php" )
 
 config = comment-block 1*( server-block LF LF )
