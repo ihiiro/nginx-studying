@@ -7,19 +7,13 @@
 
 VCHAR = %x21-7E
 
-comment = "#" *( SP / HT ) VCHAR *( SP / HT )
 
-unreserved    = ALPHA / DIGIT / "-" / "." / "_" / "~"
 
-sub-delims    = "!" / "$" / "&" / "'" / "(" / ")"
-                 / "*" / "+" / "," / ";" / "="
 
-port = *DIGIT
 
 UPALPHA = "_" / %x41-5A ; unused
 
-VAR = 1*( "SERVER_NAME" / "ERROR_PAGES" / "MAX_CLIENT_MESSAGE_SIZE" /
-            "ROUTES" / "FILE_IF_DIRECTORY_REQUEST" ) "="
+
 
 SERVER_NAME = host [ comment ] LF
 
@@ -29,7 +23,7 @@ pchar         = unreserved / sub-delims / ":" / "@"
 
 CODE = 1*DIGIT
 
-ERROR_PAGES = 1*( CODE "|" absolute-path [ comment ] LF )
+ERROR_PAGES = 1*( CODE "|" absolute-path [ comment ] LF HT )
 
 MAX_CLIENT_MESSAGE_SIZE = 1*DIGIT ( "B" / "K" / "M" / "G" ) [ comment ] LF
 
@@ -41,22 +35,45 @@ ROUTES = 1*( route [ comment ] LF HT )
 
 FILE_IF_DIRECTORY_REQUEST = system-path
 
-authority = host [ ":" port ] LF HT
 
-host = *( unreserved / sub-delims )
 
 absolute-path = 1*( "/" segment )
 
 system-path = 1*( "/" 1*VCHAR )
 
+######### comments ###########
+
 comment-block = 1*( [ comment ] LF )
+comment = "#" *( VCHAR / SP / HT )
+
+######### comments ###########
+
+config = comment-block 1*( server-block LF LF )
+
+
+########## server blocks ###########
+
+VAR = 1*( "SERVER_NAME" / "ERROR_PAGES" / "MAX_CLIENT_MESSAGE_SIZE" /
+            "ROUTES" / "FILE_IF_DIRECTORY_REQUEST" / "COMMON_GATEWAY_INTERFACE" / "UPLOADS" ) "="
 
 VAL = SERVER_NAME / ROUTES / ERROR_PAGES / FILE_IF_DIRECTORY_REQUEST / MAX_CLIENT_MESSAGE_SIZE
 
+port = *DIGIT
+
+unreserved    = ALPHA / DIGIT / "-" / "." / "_" / "~"
+
+sub-delims    = "!" / "$" / "&" / "'" / "(" / ")"
+                 / "*" / "+" / "," / ";" / "="
+
+host = *( unreserved / sub-delims ) ; @ in FSM
+
+authority = host [ ":" port ] LF HT
+
 server-block = authority 1*( VAR VAL ) ; not interpreted literally because syntax is unique to each VAR
+
+########## server blocks ###########
+
 
 UPLOADS = 1*( absolute-path "|" system-path [ comment ] LF )
 
 COMMON_GATEWAY_INTERFACE = 1*2( ( GET / POST ) _ ) ( ".py" / ".php" ) ( ".py" / ".php" )
-
-config = comment-block 1*( server-block LF LF )
