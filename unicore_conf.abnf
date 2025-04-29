@@ -1,0 +1,43 @@
+############## list extension ##############
+
+1#element => element *( "," element )
+
+############## list extension ##############
+
+
+VCHAR = %x21-7E
+
+comment = "#" *( SP / HT ) VCHAR *( SP / HT )
+
+unreserved    = ALPHA / DIGIT / "-" / "." / "_" / "~"
+
+sub-delims    = "!" / "$" / "&" / "'" / "(" / ")"
+                 / "*" / "+" / "," / ";" / "="
+
+port = *DIGIT
+
+UPALPHA = "_" / %x41-5A
+
+VAR = 1*( UPALPHA ) "="
+
+SERVER_NAME = host [ comment ] LF
+
+segment       = *pchar < RFC 3986 section 3.3 >
+
+pchar         = unreserved / sub-delims / ":" / "@"
+
+ERROR_PAGES = 1#( CODE "_" absolute-path ) [ comment ] LF
+
+MAX_CLIENT_MESSAGE_SIZE = 1*DIGIT ( "B" / "K" / "M" / "G" ) [ comment ] LF
+
+method = "GET" / "POST" / "DELETE"
+
+route = 1*3( method "_" ) "/" 1*VCHAR "_" 
+
+ROUTES = 
+
+authority = host [ ":" port ] LF HT
+
+host = *( unreserved / sub-delims )
+
+absolute-path = 1*( "/" segment )
