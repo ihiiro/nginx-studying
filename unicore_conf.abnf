@@ -29,9 +29,15 @@ MAX_CLIENT_MESSAGE_SIZE = 1*DIGIT ( "B" / "K" / "M" / "G" ) [ comment ] LF
 
 method = "GET" / "POST" / "DELETE"
 
-route = 1*3( method "_" ) system-path "|" absolute-path "|" absolute-path
+###### routes ##########
+
+system-path = 1*VCHAR
+
+route = 3*3( "1" / "0" ) "|" system-path "|" absolute-path [ "|" absolute-path ]
 
 ROUTES = 1*( route [ comment ] LF HT )
+
+###### routes ##########
 
 FILE_IF_DIRECTORY_REQUEST = system-path
 
@@ -39,7 +45,6 @@ FILE_IF_DIRECTORY_REQUEST = system-path
 
 absolute-path = 1*( "/" segment )
 
-system-path = 1*( "/" 1*VCHAR )
 
 ######### comments ###########
 
